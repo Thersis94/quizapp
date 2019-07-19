@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Music Quiz</title>
+    <meta name="description" content="The true test of all HTML knowledge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="index.css" type="text/css">
+</head>
+
+<body>
+    <!---will need to add a background image-->
+    <header role="banner">
+        <!--
+                Some kind of image that also functions as a home or restart link
+            -->
+    </header>
+    <main>
+        <form>
+            <div class="welcome">
+                <!--this div will hold the starting text.-->
+                <form>
+                    <h2>Ready to see what you know?</h2>
+                    <button type="button" class="start-button">Start the Quiz!</button>
+                </form>
+            </div>
+            <div class="question">
+                <!--This will hold the questions as well as the number correct and the current score-->
+                <form>
+                    <span class="question-number">Question 4/10</span>
+                    <span class="questions-correct">You have answered 3 correct!</span>
+                    <h3>How many strings does a guitar typially have?</h3>
+                    <fieldset>
+                        <label class="possible-answer">
+                            <input type="radio">
+                            <span>4</span>
+                        </label>
+                        <label class="possible-answer">
+                            <input type="radio">
+                            <span>3</span>
+                        </label>
+                        <label class="possible-answer">
+                            <input type="radio">
+                            <span>2</span>
+                        </label>
+                        <label class="possible-answer">
+                            <input type="radio">
+                            <span>1</span>
+                        </label>
+                        <button type="submit" class="submitButton">Submit</button>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="question-feedback">
+                <!--This will hold feedback information. If the answer is incorrect the the correct answer will also be displayed-->
+                <form>
+                    <div class="right-answer">
+                        <p>You are correct!</p>
+                        <button type="submitButton">Next Question</button>
+                    </div>
+                    <div class-"wrong-answer">
+                        <p>You are incorrect!</p>
+                        <button type="submitButton">Next Question</button>
+                    </div>
+                </form>
+            </div>
+            <div class="results">
+                <!--This will hold the results information such as the number correct and possible my overall oppinion of their performance-->
+                <form>
+                    <div class="quizz-feedback">
+                        <h4>You got 7/10 correct. Great job!</h4>
+                        <button class="submitButton">Restart the quiz</button>
+                    </div>
+                </form>
+            </div>
+        </form>
+    </main>
+    <script type="text/javascript" src="index.js" rel="Local Javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+</body>
+
+</html>
