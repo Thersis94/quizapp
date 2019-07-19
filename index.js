@@ -60,7 +60,7 @@ function renderWelcomePage() {
 }
 function renderQuestionPage() {
   console.log("Questions is being rendered")
-  $(".question").append(
+  $(".question-form").append(
     `<h2>${QUESTIONS[STORE.currentQuestion].text}</h2>
           <input type="radio" name="possible-answer">
           <label>${QUESTIONS[STORE.currentQuestion].choices[0]}</label>
