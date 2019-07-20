@@ -35,16 +35,21 @@ const QUESTIONS = [
 //Initial STORE
 const STORE = {
   score: 0,
-  currentQuestion: 0,
+  currentQuestion: 1,
   currentView: 'Welcome',
   lastAnswer: false,
+  radioValue: 0,
+  response: "",
+  numberOfQuestions:5,
+  finalResponse: "",
+  
 }
 
 const VIEWS = {
   'Welcome': renderWelcomePage,
   'Question': renderQuestionPage,
   'Feedback': renderFeedbackPage,
-  'results': renderResultsPage
+  'Results': renderResultsPage
 }
 
 function renderWelcomePage() {
@@ -61,53 +66,143 @@ function renderWelcomePage() {
 function renderQuestionPage() {
   console.log("Questions is being rendered")
   $(".question-form").append(
-    `<h2>${QUESTIONS[STORE.currentQuestion].text}</h2>
-          <input type="radio" name="possible-answer">
-          <label>${QUESTIONS[STORE.currentQuestion].choices[0]}</label>
-          <input type="radio" name="possible-answer">
+    `
+    <span class="question-span">
+    <span class="score-question-number">
+    <span class="question-count">${STORE.currentQuestion-1}/5 questions answered</span>
+        <span class="score">You've got ${STORE.score} correct</span>
+        </span>
+        <span class="questions-answers">
+    <h2>${QUESTIONS[STORE.currentQuestion].text}</h2>
+    <label>${QUESTIONS[STORE.currentQuestion].choices[0]}</label>
+          <input type="radio" name="possible-answer" value="0">
           <label>${QUESTIONS[STORE.currentQuestion].choices[1]}</label>
-          <input type="radio" name="possible-answer">
+          <input type="radio" name="possible-answer" value="1">
           <label>${QUESTIONS[STORE.currentQuestion].choices[2]}</label>
-          <input type="radio" name="possible-answer">
+          <input type="radio" name="possible-answer" value="2">
           <label>${QUESTIONS[STORE.currentQuestion].choices[3]}</label>
-          <input class="submit-answer" type="button" value="Submit Answer">`
-          //------------------------------------------------
+          <input type="radio" name="possible-answer" value="3">
+          <span class="submit-button-wrapper">
+          <button class="button" type="button">Submit</button>
+          </span>
+          </span>
+          </span>
+          `
   )
 }
 function renderFeedbackPage() {
   console.log("Feedback is being rendered")
-
+$(".feedback-form").append(
+  `
+  <span class="feedback-span">
+  <span class="score-question-number">
+  <span class="question-count">${STORE.currentQuestion-1}/5 questions answered</span>
+  <span class="score">You've got ${STORE.score} correct</span>
+  </span>
+  <span class="response-explanation">
+  <span class="response">${STORE.response}</span>
+  <span class="explanation">${QUESTIONS[STORE.currentQuestion-1].explanation}</span>
+  </span>
+  <span class="next-question-wrapper">
+  <button class="button" type="button">Next Question</button>
+  </span>
+  </span>
+  `
+)
 }
 function renderResultsPage() {
   console.log("Results is being rendered")
+  $(".results-form").append(
+    `
+    <span class="results-span">
+    <p>You got ${STORE.score} out of ${STORE.numberOfQuestions} correct!</p>
+    <p>${STORE.finalResponse}<p>
+    <button class="button" type="button">Start Over?</button>
+    </span>
+    `
+  )
 
 }
+
+//Functionality for the start over button. This will start at the first question and reset all of the STORE values to their starting position.
+$(".results-form").on("click", "button", function(){
+  event.preventDefault()
+  STORE.currentView = "Question"
+  STORE.finalResponse = ""
+  STORE.score = 0
+  STORE.currentQuestion = 1
+  $("span[class='results-span']").remove()
+  renderNextPage()
+})
 //CANT FIGURE OUT HOW TO PROPERLY TARGET THE SUBMIT-ANSWER BUTTON---------------------------------
 //User answer choice
-$(".question-form").on("submit", function () {
-  console.log("answer submitted")
+$(".question-form").on("click", "button", function () {
   event.preventDefault();
+  STORE.radioValue = $("input[name='possible-answer']:checked").val()
+  //console.log(radioValue)
+  handleAnswerSubmitted()
+  console.log("answer submitted")
+
 });
-//
-/*
-VIEWS[STORE.currentView]()
-*/
 
-//Template generators
-function generateAnswerList(answers) {
+//next question after feedback
+$(".feedback-form").on("click", "button", function() {
+  console.log("next question")
+  event.preventDefault()
+  STORE.currentView = "Question"
+  $("span[class='feedback-span']").remove()
+  renderNextPage()
+})
 
-}
 //Render functions
 function renderNextPage() {
-  console.log("rendering next page")
+  if(STORE.currentQuestion<STORE.numberOfQuestions){
   VIEWS[STORE.currentView]()
-
+  }
+  else{
+    STORE.currentView = "Results"
+    finalResponse()
+    VIEWS[STORE.currentView]()
+  }
+}
+function finalResponse(){
+  if(STORE.score>2){
+    STORE.finalResponse = "Wow, well aren't you hip!"
+  }
+  else {
+    STORE.finalResponse = "Were you even born when these came out?"
+  }
 }
 //Event handlers
 function handleAnswerSubmitted() {
+  console.log(STORE.radioValue, QUESTIONS[STORE.currentQuestion].answer)
+  if(parseInt(STORE.radioValue)===QUESTIONS[STORE.currentQuestion].answer) {
+    console.log("answered correctly")
+    STORE.lastAnswer = true
+    STORE.score = STORE.score + 1
+  }
+  else {    
+    console.log("answered incorrectly")
+    STORE.lastAnswer = false
+  }
+  responseText()
+  STORE.currentQuestion=STORE.currentQuestion + 1
+  STORE.currentView = "Feedback"
+  $("span[class='question-span']").remove()
+  renderNextPage()
+
   //Retrieve answer identifier of user-checked radio button
   //Perform check: User answer === Correct answer
   //update STORE and render appropriate section
+}
+
+function responseText(){
+  if(STORE.lastAnswer===true) {
+    STORE.response = "You answered correctly!"
+  }
+  else{
+    STORE.response = "You answered incorrectly!"
+  }
 }
 
 // handleStartQuiz
