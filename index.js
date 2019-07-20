@@ -35,7 +35,7 @@ const QUESTIONS = [
 //Initial STORE
 const STORE = {
   score: 0,
-  currentQuestion: 1,
+  currentQuestion: 0,
   currentView: 'Welcome',
   lastAnswer: false,
   radioValue: 0,
@@ -69,7 +69,7 @@ function renderQuestionPage() {
     `
     <span class="question-span">
     <span class="score-question-number">
-    <span class="question-count">${STORE.currentQuestion-1}/5 questions answered</span>
+    <span class="question-count">${STORE.currentQuestion}/5 questions answered</span>
         <span class="score">You've got ${STORE.score} correct</span>
         </span>
         <span class="questions-answers">
@@ -96,7 +96,7 @@ $(".feedback-form").append(
   `
   <span class="feedback-span">
   <span class="score-question-number">
-  <span class="question-count">${STORE.currentQuestion-1}/5 questions answered</span>
+  <span class="question-count">${STORE.currentQuestion}/5 questions answered</span>
   <span class="score">You've got ${STORE.score} correct</span>
   </span>
   <span class="response-explanation">
@@ -130,11 +130,11 @@ $(".results-form").on("click", "button", function(){
   STORE.currentView = "Question"
   STORE.finalResponse = ""
   STORE.score = 0
-  STORE.currentQuestion = 1
+  STORE.currentQuestion = 0
   $("span[class='results-span']").remove()
   renderNextPage()
 })
-//CANT FIGURE OUT HOW TO PROPERLY TARGET THE SUBMIT-ANSWER BUTTON---------------------------------
+
 //User answer choice
 $(".question-form").on("click", "button", function () {
   event.preventDefault();
