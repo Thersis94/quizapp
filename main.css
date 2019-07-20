@@ -258,8 +258,6 @@ label{
 		top:1px;
 	}
 	
-	/*css for current question and current score*/
-	
 	.score-question-number{
 		font-size: 4vw;
 		display: flex;
@@ -296,14 +294,14 @@ label{
 	}
 	
 	.response-explanation{
-		font-size: 2vw;
+		font-size: 3vw;
 		padding: 30px;
 		display: flex;
 		flex-direction: column;
 	}
 	
 	.response{
-		font-size: 3vw;
+		font-size: 5vw;
 		padding: 20px;
 		text-align: center;
 	}
