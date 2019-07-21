@@ -102,7 +102,7 @@ function renderFeedbackPage() {
   </span>
   <span class="response-explanation">
   <span class="response">${STORE.response}</span>
-  <span class="explanation">${QUESTIONS[STORE.currentQuestion - 1].explanation}</span>
+  <span class="explanation">${QUESTIONS[STORE.currentQuestion].explanation}</span>
   </span>
   <span class="next-question-wrapper">
   <button title="next question button" class="button" type="button">Next Question</button>
@@ -152,14 +152,15 @@ $(".feedback-form").on("click", "button", function () {
   event.preventDefault()
   STORE.currentView = "Question"
   $("span[class='feedback-span']").remove()
+  STORE.currentQuestion = STORE.currentQuestion + 1
   renderNextPage()
 })
-//Handles the current view calls that activate the render pages
+//Handles the current view calls that activate the render pages-----------------------------possible
 function renderNextPage() {
   if (STORE.currentQuestion < STORE.numberOfQuestions) {
     VIEWS[STORE.currentView]()
   }
-  else {
+  else{
     STORE.currentView = "Results"
     finalResponse()
     VIEWS[STORE.currentView]()
@@ -187,7 +188,6 @@ function handleAnswerSubmitted() {
     STORE.lastAnswer = false
   }
   responseText()
-  STORE.currentQuestion = STORE.currentQuestion + 1
   STORE.currentView = "Feedback"
   $("span[class='question-span']").remove()
   renderNextPage()
