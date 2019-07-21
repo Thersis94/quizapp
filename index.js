@@ -73,17 +73,21 @@ function renderQuestionPage() {
         <span class="score">You've got ${STORE.score} correct</span>
         </span>
         <content title="question and possible answers" class="questions-answers">
+        <fieldset>
+        <legend>
     <h2>${QUESTIONS[STORE.currentQuestion].text}</h2>
+    </legend>
     <label>${QUESTIONS[STORE.currentQuestion].choices[0]}</label>
-          <input title="radio selector for possible answer 1" type="radio" name="possible-answer" value="0">
+          <span class="radio-container"> <input class="radio-input" title="radio selector for possible answer 1" type="radio" name="possible-answer" value="0"></span>
           <label>${QUESTIONS[STORE.currentQuestion].choices[1]}</label>
-          <input title="radio selector for possible answer 2" type="radio" name="possible-answer" value="1">
+          <span class="radio-container"> <input class="radio-input" title="radio selector for possible answer 2" type="radio" name="possible-answer" value="1"></span>
           <label>${QUESTIONS[STORE.currentQuestion].choices[2]}</label>
-          <input title="radio selector for possible answer 3" type="radio" name="possible-answer" value="2">
+          <span class="radio-container"> <input class="radio-input" title="radio selector for possible answer 3" type="radio" name="possible-answer" value="2"></span>
           <label>${QUESTIONS[STORE.currentQuestion].choices[3]}</label>
-          <input title="radio selector for possible answer 4" type="radio" name="possible-answer" value="3">
+          <span class="radio-container"> <input class="radio-input" title="radio selector for possible answer 4" type="radio" name="possible-answer" value="3"></span>
           <span class="submit-button-wrapper">
           <button title="submit selected answer button" class="button" type="button">Submit</button>
+          </fieldset>
           </content>
           </span>
           </span>
