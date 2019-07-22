@@ -101,7 +101,7 @@ function renderFeedbackPage() {
     `
   <span class="feedback-span">
   <span class="score-question-number">
-  <span class="question-count">${STORE.currentQuestion}/5 questions answered</span>
+  <span class="question-count">${STORE.currentQuestion + 1}/5 questions answered</span>
   <span class="score">You've got ${STORE.score} correct</span>
   </span>
   <span class="response-explanation">
